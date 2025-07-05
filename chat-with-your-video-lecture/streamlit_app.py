@@ -9,7 +9,7 @@ query = st.text_input("Ask a question about the lecture")
 if query:
     db = load_vector_store()
     qa_chain = build_qa_chain(db)
-    result = qa_chain({"query": query})
+    result = qa_chain.invoke({"query": query})
     st.write("🧠 Answer:", result["result"])
     st.markdown("⏱️ Sources:")
     st.text(summarize_sources(result["source_documents"]))
