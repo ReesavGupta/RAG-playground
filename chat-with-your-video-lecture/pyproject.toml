@@ -7,5 +7,7 @@ requires-python = ">=3.11"
 dependencies = [
     "ffmpeg>=1.4",
     "ffmpeg-python>=0.2.0",
+    "langchain>=0.3.26",
+    "langchain-chroma>=0.2.4",
     "openai-whisper>=20250625",
 ]
