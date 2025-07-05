@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Ticket - Smart Customer Support</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Smart Customer Support</h1>
+            <nav>
+                <a href="index.html" class="nav-link active">Submit Ticket</a>
+                <a href="agent-dashboard.html" class="nav-link">Agent Dashboard</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="ticket-form-section">
+                <h2>Submit a Support Ticket</h2>
+                <form id="ticketForm">
+                    <div class="form-group">
+                        <label for="customer_name">Your Name *</label>
+                        <input type="text" id="customer_name" name="customer_name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customer_email">Email Address *</label>
+                        <input type="email" id="customer_email" name="customer_email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <input type="text" id="subject" name="subject" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description">Description *</label>
+                        <textarea id="description" name="description" rows="6" required 
+                                placeholder="Please describe your issue in detail..."></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Ticket</button>
+                </form>
+            </section>
+
+            <section id="responseSection" class="response-section hidden">
+                <div id="ticketDetails" class="ticket-details"></div>
+                <div id="suggestedResponse" class="suggested-response"></div>
+            </section>
+        </main>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Processing your ticket...</p>
+    </div>
+
+    <script src="js/ticket-submission.js"></script>
+</body>
+</html> 

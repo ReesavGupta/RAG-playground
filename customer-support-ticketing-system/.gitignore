@@ -1,0 +1,12 @@
+#python dependencies
+.venv
+
+#env files
+.env
+
+#logs
+logs/
+
+#pycache
+__pycache__/
+

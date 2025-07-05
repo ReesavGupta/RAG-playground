@@ -1,10 +1,10 @@
 from typing import Dict, List, Optional
 from sqlalchemy.orm import Session
-from models.tickets import Ticket, KnowledgeBase
-from services.categorization_service import TicketCategorizationService
-from services.rag_service import RAGService
-from database.chroma_db import ChromaDBService
-from utils.text_processing import TextProcessor
+from app.models.tickets import Ticket, KnowledgeBase
+from app.services.categorization_service import TicketCategorizationService
+from app.services.rag_service import RAGService
+from app.database.chroma_db import ChromaDBService
+from app.utils.text_processing import TextProcessor
 import uuid
 from datetime import datetime
 

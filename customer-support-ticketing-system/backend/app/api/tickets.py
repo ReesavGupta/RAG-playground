@@ -2,10 +2,10 @@ from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
 from typing import List, Dict, Optional
 from pydantic import BaseModel
-from database.postgres_db import get_db
-from services.tickets_service import TicketService
-from services.rag_service import RAGService
-from database.chroma_db import ChromaDBService
+from app.database.postgres_db import get_db
+from app.services.tickets_service import TicketService
+from app.services.rag_service import RAGService
+from app.database.chroma_db import ChromaDBService
 import os
 
 router = APIRouter()
@@ -20,6 +20,10 @@ class TicketResponse(BaseModel):
     ticket_id: int
     response: str
     confidence: float
+
+class TicketResolution(BaseModel):
+    resolution: str
+    agent_id: Optional[str] = None
 
 # Initialize services
 chroma_service = ChromaDBService()
@@ -82,16 +86,15 @@ async def list_tickets(
 @router.put("/{ticket_id}/resolve")
 async def resolve_ticket(
     ticket_id: int,
-    resolution: str,
-    agent_id: Optional[str] = None,
+    resolution_data: TicketResolution,
     ticket_service: TicketService = Depends(get_ticket_service)
 ):
     """Resolve ticket with solution"""
     try:
         result = ticket_service.update_ticket_resolution(
             ticket_id=ticket_id,
-            resolution=resolution,
-            agent_id=agent_id
+            resolution=resolution_data.resolution,
+            agent_id=resolution_data.agent_id
         )
         return result
     except Exception as e:

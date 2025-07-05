@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent Dashboard - Smart Customer Support</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Agent Dashboard</h1>
+            <nav>
+                <a href="index.html" class="nav-link">Submit Ticket</a>
+                <a href="agent-dashboard.html" class="nav-link active">Agent Dashboard</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="dashboard-controls">
+                <div class="filters">
+                    <select id="statusFilter">
+                        <option value="">All Statuses</option>
+                        <option value="open">Open</option>
+                        <option value="in_progress">In Progress</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                    
+                    <select id="categoryFilter">
+                        <option value="">All Categories</option>
+                        <option value="shipping_issue">Shipping Issue</option>
+                        <option value="payment_issue">Payment Issue</option>
+                        <option value="product_issue">Product Issue</option>
+                        <option value="return_refund">Return/Refund</option>
+                        <option value="account_issue">Account Issue</option>
+                        <option value="general_inquiry">General Inquiry</option>
+                    </select>
+                    
+                    <select id="priorityFilter">
+                        <option value="">All Priorities</option>
+                        <option value="urgent">Urgent</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    
+                    <button id="refreshBtn" class="refresh-btn">Refresh</button>
+                </div>
+            </section>
+
+            <section class="tickets-section">
+                <h2>Support Tickets</h2>
+                <div id="ticketsList" class="tickets-list"></div>
+            </section>
+
+            <section id="ticketDetails" class="ticket-details-section hidden">
+                <h2>Ticket Details</h2>
+                <div id="ticketInfo" class="ticket-info"></div>
+                <div id="smartResponse" class="smart-response"></div>
+                <div class="actions">
+                    <textarea id="resolutionText" placeholder="Enter resolution..." rows="4"></textarea>
+                    <button id="resolveBtn" class="resolve-btn">Resolve Ticket</button>
+                    <button id="generateResponseBtn" class="generate-btn">Generate Smart Response</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="spinner"></div>
+        <p>Processing...</p>
+    </div>
+
+    <script src="js/agent-dashboard.js"></script>
+</body>
+</html>
