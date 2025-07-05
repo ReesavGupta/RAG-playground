@@ -2,7 +2,7 @@
 .venv
 
 #env files
-.env
+*.env
 
 #logs
 logs/
