@@ -1,0 +1,19 @@
+Metadata-Version: 2.4
+Name: research-assistant
+Version: 0.1.0
+Summary: Add your description here
+Author: Research Assistant Team
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: chroma>=0.2.0
+Requires-Dist: chromadb>=1.0.15
+Requires-Dist: dotenv>=0.9.9
+Requires-Dist: langchain>=0.3.26
+Requires-Dist: langchain-community>=0.3.27
+Requires-Dist: langchain-ollama>=0.3.3
+Requires-Dist: plotly>=6.2.0
+Requires-Dist: rank-bm25>=0.2.2
+Requires-Dist: sentence-transformers>=5.0.0
+Requires-Dist: streamlit>=1.46.1
+Dynamic: author
+Dynamic: requires-python
