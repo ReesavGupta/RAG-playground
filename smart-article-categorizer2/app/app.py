@@ -6,21 +6,36 @@ import plotly.graph_objects as go
 from sklearn.decomposition import PCA
 import sys
 import os
+import pickle
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Add src to path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
-
-from src.classification import ArticleClassifier 
+from src.classification import ArticleClassifier
 
 class StreamlitApp:
     def __init__(self):
         self.classifier = ArticleClassifier()
         self.categories = ['Tech', 'Finance', 'Healthcare', 'Sports', 'Politics', 'Entertainment']
+        self.models_loaded = False
+        self.openai_key = None
+        self.model_dir = './models'
         
     def load_models(self):
-        """Load pre-trained models"""
-        # This would load your saved models
-        pass
+        """Load pre-trained models and label encoder from disk"""
+        self.classifier.embedders = {}
+        # Initialize embedders (OpenAI key handled in sidebar)
+        self.classifier.initialize_embedders(self.openai_key)
+        # Load models
+        for model_type in ['word2vec', 'bert', 'sentence_bert', 'openai']:
+            model_path = os.path.join(self.model_dir, f'{model_type}_classifier.pkl')
+            if os.path.exists(model_path):
+                with open(model_path, 'rb') as f:
+                    self.classifier.models[model_type] = pickle.load(f)
+        # Load label encoder
+        label_path = os.path.join(self.model_dir, 'label_encoder.pkl')
+        if os.path.exists(label_path):
+            with open(label_path, 'rb') as f:
+                self.classifier.label_encoder = pickle.load(f)
+        self.models_loaded = True
     
     def main(self):
         st.set_page_config(
@@ -34,6 +49,14 @@ class StreamlitApp:
         
         # Sidebar
         st.sidebar.header("Settings")
+        self.openai_key = st.sidebar.text_input("OpenAI API Key (optional, for OpenAI model)", type="password")
+        if st.sidebar.button("Load Models") or not self.models_loaded:
+            with st.spinner("Loading models..."):
+                self.load_models()
+            if self.models_loaded:
+                st.sidebar.success("Models loaded successfully!")
+            else:
+                st.sidebar.error("Failed to load models. Please check model files.")
         
         # Main content
         tab1, tab2, tab3 = st.tabs(["🔮 Classify Article", "📊 Model Comparison", "🧠 Embedding Analysis"])
@@ -59,12 +82,17 @@ class StreamlitApp:
         )
         
         if st.button("Classify Article", type="primary"):
+            if not self.models_loaded:
+                st.error("Models are not loaded. Please load models from the sidebar.")
+                return
             if article_text:
-                # Show loading
                 with st.spinner("Analyzing article..."):
-                    # Get predictions from all models
-                    results = self.predict_all_models(article_text)
-                    
+                    try:
+                        results = self.predict_all_models(article_text)
+                    except Exception as e:
+                        st.error(f"Prediction failed: {e}")
+                        return
+                
                 # Display results
                 col1, col2 = st.columns(2)
                 
@@ -95,17 +123,19 @@ class StreamlitApp:
                 st.warning("Please enter some text to classify.")
     
     def predict_all_models(self, text):
-        """Get predictions from all models"""
+        """Get predictions from all loaded models"""
         results = {}
-        
-        # Simulate predictions (replace with actual model calls)
-        models = ['word2vec', 'bert', 'sentence_bert', 'openai']
-        for model in models:
-            # Mock prediction
-            prediction = np.random.choice(self.categories)
-            confidence = np.random.uniform(0.6, 0.95)
-            results[model] = (prediction, confidence)
-            
+        available_models = list(self.classifier.models.keys())
+        if not available_models:
+            raise RuntimeError("No models are loaded.")
+        for model in available_models:
+            try:
+                preds, probs = self.classifier.predict([text], model)
+                # Use the highest probability for confidence
+                confidence = float(np.max(probs))
+                results[model] = (preds[0], confidence)
+            except Exception as e:
+                results[model] = ("Error", 0.0)
         return results
     
     def comparison_tab(self):

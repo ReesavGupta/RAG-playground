@@ -1,6 +1,6 @@
-from openai_embedding_model import OpenAIEmbedder
-from word2vec_embedding_model import Word2VecEmbedder
-from bert_embedding_model import BERTEmbedder, SentenceBERTEmbedder
+from src.openai_embedding_model import OpenAIEmbedder
+from src.word2vec_embedding_model import Word2VecEmbedder
+from src.bert_embedding_model import BERTEmbedder, SentenceBERTEmbedder
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import accuracy_score, precision_recall_fscore_support, classification_report
 from sklearn.preprocessing import LabelEncoder

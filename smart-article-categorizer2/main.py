@@ -1,4 +1,5 @@
 import os
+os.environ['NLTK_DATA'] = r'C:\Users\REESAV\AppData\Roaming\nltk_data'
 from src.data_preparation import DataPreprocessor
 from src.chroma_storage import ChromaDataManager
 from src.classification import ArticleClassifier

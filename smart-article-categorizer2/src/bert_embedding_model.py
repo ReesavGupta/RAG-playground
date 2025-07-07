@@ -42,5 +42,7 @@ class SentenceBERTEmbedder:
         self.model = SentenceTransformer(model_name)
         
     def get_embeddings_batch(self, texts):
-        """Get sentence embeddings"""
+        # Ensure input is a list
+        if not isinstance(texts, list):
+            texts = list(texts)
         return self.model.encode(texts)
