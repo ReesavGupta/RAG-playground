@@ -1,0 +1,59 @@
+# Python-generated files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment
+.venv/
+venv/
+ENV/
+
+# Environment variables
+.env
+.env.*
+
+# ChromaDB and vector store data
+chroma_db/
+demo_knowledge_db/
+*.sqlite3
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# VSCode and PyCharm project files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# MacOS and system files
+.DS_Store
+Thumbs.db
+
+# Test and coverage outputs
+htmlcov/
+.tox/
+.nox/
+.coverage
+coverage.xml
+*.cover
+*.py,cover
+
+# Logs
+*.log
+
+# Exported results
+*.json
+*.html
+
+# Misc
+*.bak
+*.swp
+
+# Virtual environments
+.venv
+
+models/

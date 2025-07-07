@@ -15,8 +15,8 @@ if __name__ == "__main__":
     build_vectorstore(df, "sentence-transformers/all-MiniLM-L6-v2", persist_dir="chroma_db_baseline")
 
     # Prepare test queries and true labels
-    test_queries = df['chunks'].explode().tolist()
-    test_labels = df.loc[df.index.repeat(df['chunks'].apply(len))]['label'].tolist()
+    test_queries = df.explode('chunks')['chunks'].tolist()
+    test_labels = df.explode('chunks')['label'].tolist()
 
     # Predict with fine-tuned model
     fine_tuned_preds = [predict_conversion(q, "models/fine_tuned_sales_embed") for q in test_queries]

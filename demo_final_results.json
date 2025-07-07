@@ -1,0 +1,162 @@
+{
+  "timestamp": "2025-07-07T19:49:21.143575",
+  "system_metrics": {
+    "processing_metrics": {
+      "total_documents": 12,
+      "total_chunks": 33,
+      "document_types": {
+        "api_reference": 3,
+        "policy_document": 1,
+        "troubleshooting_guide": 1,
+        "support_ticket": 6,
+        "technical_documentation": 1
+      },
+      "processing_time": 18.535341
+    },
+    "vector_store_stats": {
+      "collection_name": "enterprise_docs",
+      "total_documents_in_store": 66
+    },
+    "chunking_strategies": {
+      "technical_documentation": {
+        "chunk_size": 1000,
+        "chunk_overlap": 200,
+        "separators": [
+          "\n\n",
+          "\n",
+          ".",
+          "!",
+          "?",
+          ",",
+          " ",
+          ""
+        ],
+        "keep_separator": true
+      },
+      "api_reference": {
+        "chunk_size": 800,
+        "chunk_overlap": 100,
+        "separators": [
+          "\n\n",
+          "\n",
+          "```",
+          "```python",
+          "```javascript",
+          "```json"
+        ],
+        "keep_separator": true
+      },
+      "support_ticket": {
+        "chunk_size": 600,
+        "chunk_overlap": 50,
+        "separators": [
+          "\n\n",
+          "\n",
+          "---",
+          "Reply:",
+          "Comment:",
+          "Status:"
+        ],
+        "keep_separator": true
+      },
+      "policy_document": {
+        "chunk_size": 1200,
+        "chunk_overlap": 300,
+        "separators": [
+          "\n\n",
+          "\n",
+          "Section",
+          "Article",
+          "Clause",
+          ".",
+          " "
+        ],
+        "keep_separator": true
+      },
+      "tutorial": {
+        "chunk_size": 800,
+        "chunk_overlap": 150,
+        "separators": [
+          "\n\n",
+          "\nStep",
+          "\n1.",
+          "\n2.",
+          "\n3.",
+          "\n",
+          ".",
+          " "
+        ],
+        "keep_separator": true
+      },
+      "code_snippet": {
+        "chunk_size": 500,
+        "chunk_overlap": 50,
+        "separators": [
+          "\n\n",
+          "\ndef ",
+          "\nclass ",
+          "\nif ",
+          "\nfor ",
+          "\n",
+          " "
+        ],
+        "keep_separator": true
+      },
+      "troubleshooting_guide": {
+        "chunk_size": 900,
+        "chunk_overlap": 200,
+        "separators": [
+          "\n\n",
+          "\nProblem:",
+          "\nSolution:",
+          "\nStep",
+          "\n",
+          ".",
+          " "
+        ],
+        "keep_separator": true
+      },
+      "faq": {
+        "chunk_size": 400,
+        "chunk_overlap": 50,
+        "separators": [
+          "\n\n",
+          "\nQ:",
+          "\nA:",
+          "\n",
+          "?",
+          ".",
+          " "
+        ],
+        "keep_separator": true
+      },
+      "general": {
+        "chunk_size": 800,
+        "chunk_overlap": 150,
+        "separators": [
+          "\n\n",
+          "\n",
+          ".",
+          "!",
+          "?",
+          ",",
+          " ",
+          ""
+        ],
+        "keep_separator": true
+      }
+    }
+  },
+  "document_processing_stats": {
+    "total_documents": 12,
+    "total_chunks": 33,
+    "document_types": {
+      "api_reference": 3,
+      "policy_document": 1,
+      "troubleshooting_guide": 1,
+      "support_ticket": 6,
+      "technical_documentation": 1
+    },
+    "processing_time": 18.535341
+  }
+}
