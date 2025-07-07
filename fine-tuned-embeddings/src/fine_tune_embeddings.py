@@ -13,7 +13,21 @@ def fine_tune(df, output_dir='models/fine_tuned_sales_embed'):
     pooling_model = models.Pooling(word_embedding_model.get_word_embedding_dimension())
     model = SentenceTransformer(modules=[word_embedding_model, pooling_model])
 
-    train_dataloader = DataLoader(examples, shuffle=True, batch_size=16)
+    # Convert examples list to a Dataset as required by DataLoader
+    from torch.utils.data import Dataset
+
+    class ExampleDataset(Dataset):
+        def __init__(self, examples):
+            self.examples = examples
+
+        def __len__(self):
+            return len(self.examples)
+
+        def __getitem__(self, idx):
+            return self.examples[idx]
+
+    example_dataset = ExampleDataset(examples)
+    train_dataloader = DataLoader(example_dataset, shuffle=True, batch_size=16)
     train_loss = losses.CosineSimilarityLoss(model=model)
 
     model.fit(train_objectives=[(train_dataloader, train_loss)], epochs=3, warmup_steps=100)

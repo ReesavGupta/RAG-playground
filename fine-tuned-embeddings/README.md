@@ -1,4 +1,4 @@
-# Fine-Tuned Embeddings for Sales Conversion Prediction
+b# Fine-Tuned Embeddings for Sales Conversion Prediction
 
 ## Overview
 Sales teams often struggle to accurately predict customer conversion likelihood from call transcripts, relying on subjective human judgment. Generic embeddings fail to capture domain-specific sales nuances like buying signals, objection patterns, and conversation dynamics critical for accurate conversion assessment.
